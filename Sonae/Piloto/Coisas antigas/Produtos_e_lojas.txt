@@ -1,0 +1,27 @@
+- Lojas com Reposição:
+
+Continente Amadora
+Continente Braga
+Continente Cascais
+Continente CoimbraShopping
+Continente Matosinhos
+
+- Lojas sem reposição
+
+Continente Leiria
+Continente Santarém
+Continente Viana
+Continente Torres Vedras
+Continente Portimão
+
+
+1  CAFÉ DELTA Q MYTHIQ 80CAP #662867
+2  CAFÉ DELTA Q QALIDUS 80CAP #98362b
+3  CAFÉ DELTA Q QALIDUS 10CAP #9e2f24
+4  CAFÉ MOÍDO MÁQUINA CHÁVENA DELTA 250G #4b3b3b
+5  CAFÉ BELLISSIMO INTENSO 200GR #b24159
+6  CAFÉ DELTA RITUAL MU 220G #222222
+7  CAFÉ SOLÚVEL DELTA FRASCO 100G #710302
+8  CAFÉ SOLÚVEL DELTA FRASCO 200G #710302
+9  CEVADA SOLÚVEL DELTA FRASCO 200G #ee9b25
+10 BEBIDA CEREAIS DELTA C/20%CAFE FR 200G #ad4a23

@@ -1,0 +1,289 @@
+---
+title: "Delta"
+output: 
+  flexdashboard::flex_dashboard:
+    logo: logo.png
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(DT)
+library(dygraphs)
+library(plotly)
+library(markdown)
+```
+
+# NINJAS GLOBAL
+
+## Column {data-width="700"}
+
+### Presença de Produtos Verificado pelo Ninja {data-height="600"}
+
+```{r}
+ggplotly(Classic)
+```
+
+### Percentagem de produtos presentes por loja {data-height="300"}
+
+```{r}
+ggplotly(FINAL)
+```
+
+## Column {data-width="300"}
+
+### Lojas SONAE visitadas
+
+```{r}
+valueBox(85, icon = "fa-store")
+```
+
+### Resumo
+
+Relatório de auditoria a 3 produtos Delta em lojas Pingo Doce.
+
+Fim-de-semana: 18 (sexta), 19 (sábado) e 20 (domingo) de Agosto.
+
+Presença mais baixa na Cerveja Corona 35,5 CL nos lineares visitados, para além disso, de reportar que, em 16% dos locais, a Cerveja Corona estava ausente no linear mas com Stock em loja.
+
+Presença deficitária de produtos nas lojas Pingo Doce Azeitão, Parque das Nações - Norte, Quinta do Lago e Telheiras - Hiper. Dispõem apenas 1 dos 3 produtos auditados.
+
+Um total de 59 das 85 lojas (69%) apresentaram em prateleira todos os produtos auditados.
+
+
+# FRANZISKANER WEISSBIER 50 CL {data-orientation="rows"}
+
+## Row {.tabset data-height="600,"}
+
+### VERIFICAÇÃO NINJA vs STOCKS SONAE
+
+```{r}
+ggplotly(GPresença1)
+```
+
+### ROTURA DE STOCK SONAE
+
+```{r}
+ggplotly(R11)
+```
+
+
+
+### SELLOUTS 2023
+
+```{r}
+ggplotly(SO1)
+```
+
+
+
+
+```{r}
+##ggplotly(DRL1)
+```
+
+### EXPLICAÇÃO DAS MÉTRICAS 
+<style>
+.smaller-text {
+  font-size: 12px;
+}
+</style>
+
+<span class="smaller-text">
+-   VERIFICAÇÃO NINJA vs STOCKS SONAE -\> Comparação entre a presença do produto verificada pelo ninja e o Stock fornecido pela SONAE - Ninja (presente ou ausente) vs Sonae (Com Stock ou Sem Stock)- Variável Estado na Base de dados.
+-   ROTURA de STOCK SONAE -\> Número de produtos EM STOCK vs Número de produtos em ROTURA.
+-   SELLOUT2023 -\> Vendas em 2023 (Média dos 3 dias analisados).
+-   PERIGO DE ROTURA (ver na base de dados)
+    -   Dias até à rotura-\> Número de dias de duração do STOCK se a venda média diária se mantiver.
+    -   Caso não se verifique rotura de produto, e se o número de dias até à rotura for igual ou inferior a 3 (tempo médio fornencimento entre pedido e entrega) então será registado um "PERIGO ROTURA".
+    -   Se for registado o PERIGO ROTURA e não for registado STOCK expectável ou em trânsito o caso é classificado como "PERIGO ROTURA S/FORNECIMENTO".
+    -   Se for registado o PERIGO ROTURA e for registado STOCK expectável ou em trânsito o caso é classificado como "PERIGO ROTURA C/FORNECIMENTO"
+    -   Se o número de dias até à rotura for superior a 3 e inferior a 6, classifica-se como "PERIGO CASO HAJA VARIABILIDADE" (considerando a variabilidade de procura)
+</span>
+
+## Row {data-height="600"}
+
+### PRESENÇA DO PRODUTO em cada Loja (1= Presente)
+
+```{r}
+ggplotly(F1)
+```
+
+### PRESENÇA POR DIA - NINJA {data-width="200"}
+
+```{r}
+ggplotly(G1)
+```
+
+# CORONA 35,5 CL {data-orientation="rows"}
+
+## Row {.tabset data-height="600,"}
+
+### VERIFICAÇÃO NINJA vs STOCKS SONAE
+
+```{r}
+ggplotly(GPresença2)
+```
+
+### ROTURA DE STOCK SONAE
+
+```{r}
+ggplotly(R21)
+```
+
+### SELLOUTS 2023
+
+```{r}
+ggplotly(SO2)
+```
+
+
+```{r}
+#ggplotly(DRL2)
+```
+
+### EXPLICAÇÃO DAS MÉTRICAS
+
+<style>
+.smaller-text {
+  font-size: 12px;
+}
+</style>
+
+<span class="smaller-text">
+-   VERIFICAÇÃO NINJA vs STOCKS SONAE -\> Comparação entre a presença do produto verificada pelo ninja e o Stock fornecido pela SONAE - Ninja (presente ou ausente) vs Sonae (Com Stock ou Sem Stock)- Variável Estado na Base de dados.
+-   ROTURA de STOCK SONAE -\> Número de produtos EM STOCK vs Número de produtos em ROTURA.
+
+
+-   SELLOUT2023 -\> Vendas em 2023 (Média dos 3 dias analisados).
+
+-   PERIGO DE ROTURA (ver na base de dados)
+    -   Dias até à rotura-\> Número de dias de duração do STOCK se a venda média diária se mantiver.
+    -   Caso não se verifique rotura de produto, e se o número de dias até à rotura for igual ou inferior a 3 (tempo médio fornencimento entre pedido e entrega) então será registado um "PERIGO ROTURA".
+    -   Se for registado o PERIGO ROTURA e não for registado STOCK expectável ou em trânsito o caso é classificado como "PERIGO ROTURA S/FORNECIMENTO".
+    -   Se for registado o PERIGO ROTURA e for registado STOCK expectável ou em trânsito o caso é classificado como "PERIGO ROTURA C/FORNECIMENTO"
+    -   Se o número de dias até à rotura for superior a 3 e inferior a 6, classifica-se como "PERIGO CASO HAJA VARIABILIDADE" (considerando a variabilidade de procura)
+</span>
+
+## Row {data-height="600"}
+
+### PRESENÇA DO PRODUTO em cada Loja (1= Presente)
+
+```{r}
+ggplotly(F2)
+```
+
+### PRESENÇA POR DIA - NINJA {data-width="200"}
+
+```{r}
+ggplotly(G2)
+```
+
+# LEFFE BLONDE 33 CL {data-orientation="rows"}
+
+## Row {.tabset data-height="600,"}
+
+### VERIFICAÇÃO NINJA vs STOCKS SONAE
+
+```{r}
+ggplotly(GPresença3)
+```
+
+### ROTURA DE STOCK SONAE
+
+```{r}
+ggplotly(R31)
+```
+
+### SELLOUTS 2023
+
+```{r}
+ggplotly(SO3)
+```
+
+
+
+```{r}
+#ggplotly(DRL3)
+```
+
+
+### EXPLICAÇÃO DAS MÉTRICAS
+<style>
+.smaller-text {
+  font-size: 12px;
+}
+</style>
+
+<span class="smaller-text">
+-   VERIFICAÇÃO NINJA vs STOCKS SONAE -\> Comparação entre a presença do produto verificada pelo ninja e o Stock fornecido pela SONAE - Ninja (presente ou ausente) vs Sonae (Com Stock ou Sem Stock)- Variável Estado na Base de dados.
+-   ROTURA de STOCK SONAE -\> Número de produtos EM STOCK vs Número de produtos em ROTURA.
+
+
+-   SELLOUT2023 -\> Vendas em 2023 (Média dos 3 dias analisados).
+
+-   PERIGO DE ROTURA (ver na base de dados)
+    -   Dias até à rotura-\> Número de dias de duração do STOCK se a venda média diária se mantiver.
+    -   Caso não se verifique rotura de produto, e se o número de dias até à rotura for igual ou inferior a 3 (tempo médio fornencimento entre pedido e entrega) então será registado um "PERIGO ROTURA".
+    -   Se for registado o PERIGO ROTURA e não for registado STOCK expectável ou em trânsito o caso é classificado como "PERIGO ROTURA S/FORNECIMENTO".
+    -   Se for registado o PERIGO ROTURA e for registado STOCK expectável ou em trânsito o caso é classificado como "PERIGO ROTURA C/FORNECIMENTO"
+    -   Se o número de dias até à rotura for superior a 3 e inferior a 6, classifica-se como "PERIGO CASO HAJA VARIABILIDADE" (considerando a variabilidade de procura)
+</span>
+
+## Row {data-height="600"}
+
+### PRESENÇA DO PRODUTO em cada Loja (1= Presente)
+
+```{r}
+ggplotly(F3)
+```
+
+### PRESENÇA POR DIA - NINJA {data-width="200"}
+
+```{r}
+ggplotly(G3)
+```
+
+
+# BASE DE DADOS
+
+## Column {.tabset data-width="1000,"}
+
+### Base de dados - NINJAS + STOCKS e SELLOUTS
+
+```{r}
+datatable(DATAFUSION[, c(8, 1:6, 9:14)], extensions = c('Buttons', 'SearchBuilder'), options = list(
+  dom = 'Bfrtip',
+  buttons = list(
+    'copy', 
+    list(
+      extend = 'collection',
+      buttons = c('excel', 'pdf'),
+      text = 'Download'
+    ),
+    'searchBuilder'
+  )
+))
+```
+
+### Base de dados - TOTAL + MÉTRICAS
+
+```{r}
+datatable(DATAFUSION[,c(8,1:7,9:28)], extensions = c('Buttons', 'SearchBuilder'), options = list(
+  dom = 'Bfrtip',
+  lengthMenu = list(c(10, 25, 50, -1), c('10', '25', '50', 'Todos')),
+  buttons = list(
+    'copy', 
+    list(
+      extend = 'collection',
+      buttons = c('excel', 'pdf'),
+      text = 'Download'
+    ),
+    'searchBuilder'
+  )
+))
+```
+
+rmarkdown::render("D:\\B&N Dados\\Delta\\JM\\Padrao\\Padrao_08_2023\\dashboardJM_08_23.Rmd")
+

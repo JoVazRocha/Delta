@@ -1,0 +1,499 @@
+---
+title:"DELTA"
+output: 
+  flexdashboard::flex_dashboard:
+    logo: logo.png
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(DT)
+library(dygraphs)
+library(plotly)
+library(markdown)
+```
+
+# NINJAS GLOBAL
+## Column {data-width=700}
+
+### Proporção de produtos presentes
+
+```{r}
+ggplotly(Classic)
+```
+
+### Percentagem de produtos presentes por lojas
+
+```{r}
+#ggplotly(FINAL)
+```
+
+## Column {data-width=300}
+
+### Lojas SONAE visitadas
+
+```{r}
+#valueBox(dim(fileNinjas1)[1], icon = "fa-store")
+```
+
+### A promoção das Capsulas estava presente?  {data-height=330}
+
+```{r}
+#ggplotly(GPromo1)
+```
+
+### Resumo
+Relatório de auditoria a 5 produtos Delta em lojas SONAE.
+
+Fim-de-semana: 30 de Março (sexta), 1 de Abril(sabado) e 2 de Abril(domingo).
+
+- Presença mais baixa do QALIDUS e DEQAFEINATUS nos lineares visitados.
+- O Modelo Anadia não continha nenhum dos 3 cafés.
+- Presença deficitária de produtos nos Continente Modelo de Ourém e Torres Vedras e no Continente de Valongo.
+- Mais rotura no linear de café  do que no linear de cervejas.
+- Apenas 47% das lojas tinham a promoção da capsulas presente(comunicada).
+- A promoção estava presente em maior proporção nas lojas com repetição contratada.
+- As lojas com reposição registaram ligeiramente menor proporção de produtos ausentes em linear (verificação ninjas).
+- De salientar ainda a desadequação dos stocks e do fornecimento dos produtos em alguns locais e do perigo de rotura da Franziskaner(ver gráficos individuais e Base de dados).
+
+# REPOSIÇÃO
+## Column {data-width=500}
+
+### Lojas SONAE com Reposição Contratada
+
+```{r}
+#valueBox(dim(Repo_S)[1], icon = "fa-check-circle", color="#FFA07A")
+```
+
+### Proporção de produtos presentes
+```{r}
+ggplotly(CLASSICR)
+```
+
+### Percentagem de produtos presentes por loja
+
+```{r}
+#ggplotly(FINALSL)
+```
+
+
+## Column {data-width=500}
+
+### Lojas SONAE sem Reposição Contratada
+
+```{r}
+#valueBox(dim(Repo_N)[1], icon = "fa-ban", color="#6495ED")
+```
+
+### Proporção de produtos presentes
+```{r}
+ggplotly(CLASSICRC)
+```
+
+### Percentagem de produtos presentes por loja
+
+```{r}
+#ggplotly(FINALNL)
+```
+
+
+
+
+
+# QALIDUS 10{data-orientation=rows}
+## Row {data-height=600, .tabset}
+
+
+
+### VERIFICAÇÃO NINJA vs STOCKS SONAE
+```{r}
+ggplotly(GPresença1)
+```
+
+### ROTURA DE STOCK SONAE
+```{r}
+ggplotly(R21)
+```
+
+
+### CICLO DE REPOSIÇÃO
+```{r}
+ggplotly(Ci1)
+```
+
+### ADEQUAÇÃO DE STOCK E FORNECIMENTO
+```{r}
+ggplotly(A21)
+```
+
+### SELLOUTS 2023
+```{r}
+ggplotly(SO1)
+```
+
+### SELLOUTS 2022
+```{r}
+ggplotly(SO11)
+```
+
+
+
+
+### EXPLICAÇÃO DAS MÉTRICAS
+- VERIFICAÇÃO NINJA vs STOCKS SONAE -> Comparação entre a presença do produto verificada pelo ninja e o Stock fornecido pela SONAE - Ninja (presente ou ausente) vs Sonae (Com Stock ou Sem Stock)- Variável Estado na Base de dados.
+- ROTURA de STOCK SONAE -> Número de produtos EM STOCK vs Número de produtos em ROTURA.
+- CICLO DE REPOSIÇÃO -> Número de vezes que o STOCK preenche o linear (calculado como PRESTOCK - Espaço em linear em Nº de produtos)
+- ADEQUAÇÃO DE STOCK E FORNECIMENTO -> Se o STOCK der para preencher a totalidade de um espaço de linear (ciclo de reposição>1.1) então é suficiente, se não der classifica-se como insuficiente. Se o número de unidades de STOCK somada ao número de unidades em fornecimento (STOCK em transito e STOCK expectável) der para preencher um linear, o fornecimento é Adequado, caso contrário classifica-se como inadequado.
+- SELLOUT2023 -> Vendas em 2023 (Média dos 3 dias analisados).
+- SELLOUT2022 -> Vendas em 2022 (Média dos 3 dias homólogos - 1º Fim de semana de Abril de 2022).
+- PERIGO DE ROTURA (ver na base de dados)
+   - Dias até à rotura-> Número de dias de duração do STOCK se a venda média diária se mantiver.
+   - Caso não se verifique rotura de produto, e se o número de dias até à rotura for igual ou inferior a 3 (tempo médio fornencimento entre pedido e entrega) então será registado um "PERIGO ROTURA". 
+   - Se for registado o PERIGO ROTURA e não for registado STOCK expectável ou em trânsito o caso é classificado como "PERIGO ROTURA S/FORNECIMENTO". 
+   - Se for registado o PERIGO ROTURA e for registado STOCK expectável ou em trânsito o caso é classificado como "PERIGO ROTURA C/FORNECIMENTO"
+   - Se o número de dias até à rotura for superior a 3 e inferior a 6, classifica-se como "PERIGO CASO HAJA VARIABILIDADE"(considerando a variabilidade de procura)
+
+
+
+
+ 
+
+
+
+## Row {data-height=600} 
+
+### PRESENÇA DO PRODUTO em cada Loja (1= Presente)
+```{r}
+#ggplotly(FINAL1)
+```
+
+### PRESENÇA POR DIA - NINJA {data-width=200}
+```{r}
+ggplotly(G1)
+```
+
+
+
+
+
+
+# AQTIVUS 10 {data-orientation=rows}
+## Row {data-height=600, .tabset}
+
+
+### VERIFICAÇÃO NINJA vs STOCKS SONAE
+```{r}
+ggplotly(GPresença2)
+```
+
+### ROTURA DE STOCK SONAE
+```{r}
+ggplotly(R31)
+```
+
+
+### CICLO DE REPOSIÇÃO
+```{r}
+ggplotly(Ci2)
+```
+
+### ADEQUAÇÃO DE STOCK E FORNECIMENTO
+```{r}
+ggplotly(A31)
+```
+
+### SELLOUTS 2023
+```{r}
+ggplotly(SO2)
+```
+
+### SELLOUTS 2022
+```{r}
+ggplotly(SO21)
+```
+
+
+
+### EXPLICAÇÃO DAS MÉTRICAS
+- VERIFICAÇÃO NINJA vs STOCKS SONAE -> Comparação entre a presença do produto verificada pelo ninja e o Stock fornecido pela SONAE - Ninja (presente ou ausente) vs Sonae (Com Stock ou Sem Stock)- Variavel Estado na Base de dados
+- ROTURA de STOCK SONAE -> Número de produtos EM STOCK vs Número de produtos em ROTURA.
+- CICLO DE REPOSIÇÃO -> Número de vezes que o stock preenche o linear (calculado como PRESTOCK - Espaço em linear em Nº de produtos)
+- ADEQUAÇÃO DE STOCK E FORNECIMENTO -> Se o STOCK der para preencher a totalidade de um espaço de linear (ciclo de reposição>1.1) então é suficiente, se não der classifica-se como insuficiente. Se o número de unidades de STOCK somada ao número de unidades em fornecimento (STOCK em transito e STOCK expectável) der para preencher um linear, o fornecimento é Adequado, caso contrário classifica-se como inadequado.
+- SELLOUT2023 -> Vendas em 2023 (Média dos 3 dias analisados).
+- SELLOUT2023 -> Vendas em 2022 (Média dos 3 dias homólogos - 1º Fim de semana de Abril de 2022).
+- PERIGO DE ROTURA (ver na base de dados)
+   - Dias até à rotura-> Nº de dias de duração do stock se a venda média diaria se mantiver.
+   - Caso não se verifique rotura de produto, e se o nº de dias até à rotura for igual ou inferior a 3 (tempo médio fornencimento entre pedido e entrega) então será registado um "PERIGO ROTURA". 
+   - Se for registado o PERIGO ROTURA e não for registado stock expectavel ou em transito o caso é classificado como "PERIGO ROTURA S/FORNECIMENTO". 
+   - Se for registado o PERIGO ROTURA e for registado stock expectavel ou em transito o caso é classificado como "PERIGO ROTURA C/FORNECIMENTO"
+   - Se o nº de dias até à rotura for superior a 3 e inferior a 6, classifica-se como "PERIGO CASO HAJA VARIABILIDADE"(considerando a variabilidade de procura)
+
+
+## Row {data-height=600} 
+
+### PRESENÇA DO PRODUTO em cada Loja (1= Presente)
+```{r}
+#ggplotly(FINAL2)
+```
+
+### PRESENÇA POR DIA - NINJA {data-width=200}
+```{r}
+ggplotly(G2)
+```
+
+
+
+
+
+# DEQAFEINATUS 10 {data-orientation=rows}
+## Row {data-height=600, .tabset}
+
+
+### VERIFICAÇÃO NINJA vs STOCKS SONAE
+```{r}
+ggplotly(GPresença3)
+```
+
+### ROTURA DE STOCK SONAE
+```{r}
+ggplotly(R41)
+```
+
+
+### CICLO DE REPOSIÇÃO
+```{r}
+ggplotly(Ci3)
+```
+
+### ADEQUAÇÃO DE STOCK E FORNECIMENTO
+```{r}
+ggplotly(A41)
+```
+
+### SELLOUTS 2023
+```{r}
+ggplotly(SO3)
+```
+
+### SELLOUTS 2022
+```{r}
+ggplotly(SO31)
+```
+
+
+
+
+
+
+### EXPLICAÇÃO DAS MÉTRICAS
+- VERIFICAÇÃO NINJA vs STOCKS SONAE -> Comparação entre a presença do produto verificada pelo ninja e o Stock fornecido pela SONAE - Ninja (presente ou ausente) vs Sonae (Com Stock ou Sem Stock)- Variavel Estado na Base de dados
+- ROTURA de STOCK SONAE -> Número de produtos EM STOCK vs Número de produtos em ROTURA.
+- CICLO DE REPOSIÇÃO -> Número de vezes que o stock preenche o linear (calculado como PRESTOCK - Espaço em linear em Nº de produtos)
+- ADEQUAÇÃO DE STOCK E FORNECIMENTO -> Se o STOCK der para preencher a totalidade de um espaço de linear (ciclo de reposição>1.1) então é suficiente, se não der classifica-se como insuficiente. Se o número de unidades de STOCK somada ao número de unidades em fornecimento (STOCK em transito e STOCK expectável) der para preencher um linear, o fornecimento é Adequado, caso contrário classifica-se como inadequado.
+- SELLOUT2023 -> Vendas em 2023 (Média dos 3 dias analisados).
+- SELLOUT2023 -> Vendas em 2022 (Média dos 3 dias homologos - 1º Fim de semana de Abril de 2022).
+- PERIGO DE ROTURA (ver na base de dados)
+   - Dias até à rotura-> Nº de dias de duração do stock se a venda média diaria se mantiver.
+   - Caso não se verifique rotura de produto, e se o nº de dias até à rotura for igual ou inferior a 3 (tempo médio fornencimento entre pedido e entrega) então será registado um "PERIGO ROTURA". 
+   - Se for registado o PERIGO ROTURA e não for registado stock expectavel ou em transito o caso é classificado como "PERIGO ROTURA S/FORNECIMENTO". 
+   - Se for registado o PERIGO ROTURA e for registado stock expectavel ou em transito o caso é classificado como "PERIGO ROTURA C/FORNECIMENTO"
+   - Se o nº de dias até à rotura for superior a 3 e inferior a 6, classifica-se como "PERIGO CASO HAJA VARIABILIDADE"(considerando a variabilidade de procura)
+
+
+## Row {data-height=600} 
+
+### PRESENÇA DO PRODUTO em cada Loja (1= Presente)
+```{r}
+#ggplotly(FINAL3)
+```
+
+### PRESENÇA POR DIA - NINJA {data-width=200}
+```{r}
+ggplotly(G3)
+```
+
+
+
+
+
+
+
+# CORONA 35,5 10 {data-orientation=rows}
+## Row {data-height=600, .tabset}
+
+
+### VERIFICAÇÃO NINJA vs STOCKS SONAE
+```{r}
+ggplotly(GPresença4)
+```
+
+### ROTURA DE STOCK SONAE
+```{r}
+ggplotly(R51)
+```
+
+
+### CICLO DE REPOSIÇÃO
+```{r}
+ggplotly(Ci4)
+```
+
+### ADEQUAÇÃO DE STOCK E FORNECIMENTO
+```{r}
+ggplotly(A51)
+```
+
+### SELLOUTS 2023
+```{r}
+ggplotly(SO4)
+```
+
+### SELLOUTS 2022
+```{r}
+ggplotly(SO41)
+```
+
+
+
+### EXPLICAÇÃO DAS MÉTRICAS
+- VERIFICAÇÃO NINJA vs STOCKS SONAE -> Comparação entre a presença do produto verificada pelo ninja e o Stock fornecido pela SONAE - Ninja (presente ou ausente) vs Sonae (Com Stock ou Sem Stock)
+- ROTURA de STOCK SONAE -> Número de produtos EM STOCK vs Número de produtos em ROTURA.
+- CICLO DE REPOSIÇÃO -> Número de vezes que o stock preenche o linear (calculado como PRESTOCK - Espaço em linear em Nº de produtos)
+- ADEQUAÇÃO DE STOCK E FORNECIMENTO -> Se o STOCK der para preencher a totalidade de um espaço de linear (ciclo de reposição>1.1) então é suficiente, se não der classifica-se como insuficiente. Se o número de unidades de STOCK somada ao número de unidades em fornecimento (STOCK em transito e STOCK expectável) der para preencher um linear, o fornecimento é Adequado, caso contrário classifica-se como inadequado.
+- SELLOUT2023 -> Vendas em 2023 (Média dos 3 dias analisados).
+- SELLOUT2023 -> Vendas em 2022 (Média dos 3 dias homologos - 1º Fim de semana de Abril de 2022).
+- PERIGO DE ROTURA (ver na base de dados)
+   - Dias até à rotura-> Nº de dias de duração do stock se a venda média diaria se mantiver.
+   - Caso não se verifique rotura de produto, e se o nº de dias até à rotura for igual ou inferior a 3 (tempo médio fornencimento entre pedido e entrega) então será registado um "PERIGO ROTURA". 
+   - Se for registado o PERIGO ROTURA e não for registado stock expectavel ou em transito o caso é classificado como "PERIGO ROTURA S/FORNECIMENTO". 
+   - Se for registado o PERIGO ROTURA e for registado stock expectavel ou em transito o caso é classificado como "PERIGO ROTURA C/FORNECIMENTO"
+   - Se o nº de dias até à rotura for superior a 3 e inferior a 6, classifica-se como "PERIGO CASO HAJA VARIABILIDADE"(considerando a variabilidade de procura)
+
+
+## Row {data-height=600} 
+
+### PRESENÇA DO PRODUTO em cada Loja (1= Presente)
+```{r}
+#ggplotly(FINAL4)
+```
+
+### PRESENÇA POR DIA - NINJA {data-width=200}
+```{r}
+ggplotly(G4)
+```
+
+
+
+# FRANZISKANER WEISSBIER 50{data-orientation=rows}
+
+## Row {data-height=600, .tabset}
+
+
+### VERIFICAÇÃO NINJA vs STOCKS SONAE
+```{r}
+ggplotly(GPresença5)
+```
+
+### ROTURA DE STOCK SONAE
+```{r}
+ggplotly(R61)
+```
+
+
+### CICLO DE REPOSIÇÃO
+```{r}
+ggplotly(Ci5)
+```
+
+### ADEQUAÇÃO DE STOCK E FORNECIMENTO
+```{r}
+ggplotly(A61)
+```
+
+
+### SELLOUTS 2023
+```{r}
+ggplotly(SO5)
+```
+
+### SELLOUTS 2022
+```{r}
+ggplotly(SO51)
+```
+
+
+
+### EXPLICAÇÃO DAS MÉTRICAS
+- VERIFICAÇÃO NINJA vs STOCKS SONAE -> Comparação entre a presença do produto verificada pelo ninja e o Stock fornecido pela SONAE - Ninja (presente ou ausente) vs Sonae (Com Stock ou Sem Stock)- Variavel Estado na Base de dados
+- ROTURA de STOCK SONAE -> Número de produtos EM STOCK vs Número de produtos em ROTURA.
+- CICLO DE REPOSIÇÃO -> Número de vezes que o stock preenche o linear (calculado como PRESTOCK - Espaço em linear em número de produtos)
+- ADEQUAÇÃO DE STOCK E FORNECIMENTO -> Se o STOCK der para preencher a totalidade de um espaço de linear (ciclo de reposição>1.1) então é suficiente, se não der classifica-se como insuficiente. Se o número de unidades de STOCK somada ao número de unidades em fornecimento (STOCK em transito e STOCK expectável) der para preencher um linear, o fornecimento é Adequado, caso contrário classifica-se como inadequado.
+- SELLOUT2023 -> Vendas em 2023 (Média dos 3 dias analisados).
+- SELLOUT2023 -> Vendas em 2022 (Média dos 3 dias homologos - 1º Fim de semana de Abril de 2022).
+- PERIGO DE ROTURA (ver na base de dados)
+   - Dias até à rotura-> Número de dias de duração do stock se a venda média diaria se mantiver.
+   - Caso não se verifique rotura de produto, e se o nº de dias até à rotura for igual ou inferior a 3 (tempo médio fornencimento entre pedido e entrega) então será registado um "PERIGO ROTURA". 
+   - Se for registado o PERIGO ROTURA e não for registado stock expectavel ou em transito o caso é classificado como "PERIGO ROTURA S/FORNECIMENTO". 
+   - Se for registado o PERIGO ROTURA e for registado stock expectavel ou em transito o caso é classificado como "PERIGO ROTURA C/FORNECIMENTO"
+   - Se o nº de dias até à rotura for superior a 3 e inferior a 6, classifica-se como "PERIGO CASO HAJA VARIABILIDADE"(considerando a variabilidade de procura)
+
+
+## Row {data-height=600} 
+
+### PRESENÇA DO PRODUTO em cada Loja (1= Presente)
+```{r}
+#ggplotly(FINAL5)
+```
+
+### PRESENÇA POR DIA - NINJA {data-width=200}
+```{r}
+ggplotly(G5)
+```
+
+
+
+
+# BASE DE DADOS
+## Column {data-width=1000, .tabset}
+
+### Base de dados - NINJAS + STOCKS e SELLOUTS
+
+```{r}
+datatable(DATAFUSION[, c(1:3,43,37,5:11,16,20,24,28,32,38:42)], extensions = c('Buttons', 'SearchBuilder'), options = list(
+  dom = 'Bfrtip',
+  buttons = list(
+    'copy', 
+    list(
+      extend = 'collection',
+      buttons = c('excel', 'pdf'),
+      text = 'Download'
+    ),
+    'searchBuilder'
+  )
+))
+```
+
+
+### Base de dados - TOTAL + MÉTRICAS
+
+```{r}
+datatable(DATAFUSION, extensions = c('Buttons', 'SearchBuilder'), options = list(
+  dom = 'Bfrtip',
+  lengthMenu = list(c(10, 25, 50, -1), c('10', '25', '50', 'Todos')),
+  buttons = list(
+    'copy', 
+    list(
+      extend = 'collection',
+      buttons = c('excel', 'pdf'),
+      text = 'Download'
+    ),
+    'searchBuilder'
+  )
+))
+```
+
+
+rmarkdown::render("dashboardPiloto_sonae.Rmd")
+
